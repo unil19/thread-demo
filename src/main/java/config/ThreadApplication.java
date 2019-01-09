@@ -9,6 +9,7 @@ public class ThreadApplication {
 
     public final static Object object = new Object();
 
+
     public static void main(String[] args) throws InterruptedException {
 
 //        Thread t1 = new Thread(new SimpleRunner1());
@@ -55,16 +56,43 @@ public class ThreadApplication {
 //        T1.start();
 //        T2.start();
 
-        Thread bs1 = new BadSuspend("t1");
-        Thread bs2 = new BadSuspend("t2");
-        bs1.start();
-        Thread.sleep(100);
-        bs2.start();
-        bs1.resume();
-        bs2.resume();
-        bs1.join();
-        bs2.join();
+//        Thread bs1 = new BadSuspend("t1");
+//        Thread bs2 = new BadSuspend("t2");
+//        bs1.start();
+//        Thread.sleep(100);
+//        bs2.start();
+//        bs1.resume();
+//        bs2.resume();
+//        bs1.join();
+//        bs2.join();
 
+//        GoodSuspend gs = new GoodSuspend();
+//        GoodSuspendCompany gsc = new GoodSuspendCompany();
+//        gs.start();
+//        gsc.start();
+//        Thread.sleep(1000);
+//        gs.suspendMe();
+//        System.out.println("suspend t1 2 sec");
+//        Thread.sleep(4000);
+//        System.out.println("resume t1");
+//        gs.resumeMe();
+
+//        Thread[] threads = new Thread[10];
+//        for(int i = 0; i< 10; i++) {
+//            threads[i] = new Thread(new PlusTask());
+//            threads[i].start();
+//        }
+//        for (int i = 0; i<10; i++) {
+//            threads[i].join();
+//        }
+//        System.out.println(PlusTask.counter);
+
+        Thread noVisibilityThread = new Thread(new NoVisibility());
+        noVisibilityThread.start();
+        Thread.sleep(1000);
+        NoVisibility.number = 40;
+        NoVisibility.ready = true;
+        Thread.sleep(10000);
 
     }
 }
